@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import trackit from './../assets/track-it.png'
 import { Link } from 'react-router-dom'
 
-import GerenciadorInputs from './../GerenciadorInputs'
+import GerenciadorInput from '../GerenciadorInput'
+import LogoPaginas from '../LogoPaginas'
 
 
 export default function TelaLogin(props){
@@ -11,12 +11,9 @@ export default function TelaLogin(props){
 
     return(
         <>
-            <div className="container-imagem">
-                <img src={trackit} alt="Logo do Track-it" />
-            </div>
-            
+            <LogoPaginas />
             <form>
-                <GerenciadorInputs 
+                <GerenciadorInput
                     valoresInput={valoresInput}
                     setValoresInput={setValoresInput}
                 />
