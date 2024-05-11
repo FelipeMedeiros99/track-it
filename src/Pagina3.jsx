@@ -1,7 +1,16 @@
+import { useContext } from "react"
+
+import { Contexto } from "./Contexto/Contexto"
+
+
 function Pagina3(){
+
+    const {contador, setContador} = useContext(Contexto)
+
     return(
         <>
-            Pagina 3
+            <p>{contador}</p>
+            <button onClick={()=>setContador(contador+1)}> + </button>
         </>
     )
 }

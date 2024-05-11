@@ -1,15 +1,14 @@
 import { useContext } from "react"
 
-import ContextoProvedor from './context/context'
-
+import Pagina2 from './Pagina2'
 
 function Pagina1(){
     
-    const {teste, setTeste} = useContext(Contexto)
 
     return(
         <>
             Pagina 1
+            <Pagina2></Pagina2>
         </>
     )
 }
