@@ -1,4 +1,4 @@
-import trackit from './track-it.png'
+import trackit from './track-it.svg'
 
 export default function LogoPaginas(){
     return (
