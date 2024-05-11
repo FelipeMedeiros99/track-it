@@ -2,12 +2,12 @@ import { useState } from 'react'
 import trackit from './../assets/track-it.png'
 import { Link } from 'react-router-dom'
 
+import GerenciadorInputs from './../GerenciadorInputs'
 
 
 export default function TelaLogin(props){
 
     const [valoresInput, setValoresInput] = useState({email:'', senha:''})
-    const chavesInputs = Object.keys(valoresInput)
 
     return(
         <>
@@ -16,16 +16,10 @@ export default function TelaLogin(props){
             </div>
             
             <form>
-                {chavesInputs.map((chave, index)=>(
-                    <input 
-                        key={index}
-                        type="text"
-                        value={valoresInput[chave]}
-                        onChange={(event)=>{
-                            const valor = event.target.value
-                            setValoresInput({...valoresInput, [chave] :valor})
-                        }} />
-                ))}
+                <GerenciadorInputs 
+                    valoresInput={valoresInput}
+                    setValoresInput={setValoresInput}
+                />
                 
                 <button>Entrar</button>
             </form>
