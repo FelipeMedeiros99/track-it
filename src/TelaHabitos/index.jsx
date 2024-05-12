@@ -21,6 +21,6 @@ export default function TelaHabitos(props) {
     )
 }
 
-const Conteudo = styled.div`
+const Conteudo = styled.main`
     padding: 70px 0 70px 0;
 `
