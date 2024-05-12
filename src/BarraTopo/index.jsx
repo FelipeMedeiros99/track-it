@@ -12,6 +12,9 @@ export default function BarraTopo({ link_foto }) {
 
 
 const Barra = styled.div`
+    position: fixed;
+    top: 0;
+    width: 100%;
     display: flex;
     align-items: center;
     padding: 10px 18px 10px 18px;
