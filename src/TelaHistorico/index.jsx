@@ -19,7 +19,7 @@ export default function TelaHistorico(props){
 }
 
 const Conteudo = styled.main`
-    padding: 70px 0 70px 0;
+    padding: 98px 17px 70px 17px;
 
 `
 
