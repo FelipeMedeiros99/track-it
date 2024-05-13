@@ -6,16 +6,22 @@ import LogoPaginas from "../LogoPaginas"
 
 export default function TelaCadastro(props){
     const [valoresInput, setValoresInput] = useState({email:'', senha:'', nome:'', 'link foto': ''})
+    
     return(
         <>
             <LogoPaginas />
-            <form>
+            <form onSubmit={(event)=>{
+                event.preventDefault()
+                console.log(valoresInput)
+            }}>
+
                 <GerenciadorInput 
                     valoresInput={valoresInput}
                     setValoresInput={setValoresInput}    
                 />
-                <button>Cadastrar</button>
+                <button type="submit">Cadastrar</button>
             </form>
+            
             <Link to="/">Já tem uma conta? Faça login</Link>
         </>
     )

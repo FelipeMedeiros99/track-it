@@ -12,13 +12,16 @@ export default function TelaLogin(props){
     return(
         <>
             <LogoPaginas />
-            <form>
+            <form onSubmit={(event)=>{
+                event.preventDefault()
+                console.log(event)
+            }}>
                 <GerenciadorInput
                     valoresInput={valoresInput}
                     setValoresInput={setValoresInput}
                 />
                 
-                <button>Entrar</button>
+                <button type="submit">Entrar</button>
             </form>
 
             <Link to='/cadastro'> Não tem uma conta? Cadastre-se</Link>
