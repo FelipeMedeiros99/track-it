@@ -19,7 +19,7 @@ export default function TelaHabitos(props) {
 
 
     function adicionarHabito(){
-        setInputsAdicionarTarefa({...inputsAdicionarTarefa, [controladorDeAdicaoDeHabitos]:''})
+        setInputsAdicionarTarefa({...inputsAdicionarTarefa, [controladorDeAdicaoDeHabitos]:{texto:'', dias:[]}})
         setControladorDeAdicaoDeHabitos(controladorDeAdicaoDeHabitos+1)
     }
 
