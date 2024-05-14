@@ -1,7 +1,7 @@
 import BarraTopo from '../BarraTopo'
 import BarraFim from '../BarraFim'
 import styled from 'styled-components'
-import GerenciadorInput from '../GerenciadorInput'
+import AdicionarTarefas from './AdicionarTarefas'
 
 import { Contexto } from '../Contexto'
 import { useContext, useEffect, useState } from 'react'
@@ -9,20 +9,21 @@ import axios from 'axios'
 
 
 export default function TelaHabitos(props) {
+
     const {dados, setDados} = useContext(Contexto)
     const [listaHabitos, setListaHabitos] = useState([])
     const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits'
     const [controladorDeAdicaoDeHabitos, setControladorDeAdicaoDeHabitos] = useState(0)
     const [inputsAdicionarTarefa, setInputsAdicionarTarefa] = useState({})    
-    const semana = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
 
-    console.log(inputsAdicionarTarefa)
+
 
     function adicionarHabito(){
         setInputsAdicionarTarefa({...inputsAdicionarTarefa, [controladorDeAdicaoDeHabitos]:''})
         setControladorDeAdicaoDeHabitos(controladorDeAdicaoDeHabitos+1)
     }
 
+    console.log(inputsAdicionarTarefa)
 
     let configuracao = {
         headers:{
@@ -34,7 +35,7 @@ export default function TelaHabitos(props) {
 
     useEffect(()=>{
         axios.get(URL, configuracao)
-        .then((data)=> setListaHabitos(data.data))
+        .then((data)=> {console.log('deu certo'); setListaHabitos(data.data)})
         .catch((data)=>console.log("deu erro: ", data.response))
     }, [dados])
 
@@ -50,30 +51,7 @@ export default function TelaHabitos(props) {
                     <ion-icon name="add-outline" onClick={adicionarHabito}></ion-icon>
                 </div>
 
-                {Object.keys(inputsAdicionarTarefa).map((contador, index)=>(
-                    <form key={index} className="container-adicionar-tarefa">
-                        <input type="text" 
-                            value={inputsAdicionarTarefa.contador}
-                            onChange={(event)=>{
-                                let copiaDadosInputs = {...inputsAdicionarTarefa}
-                                copiaDadosInputs[contador] = event.target.value
-                                setInputsAdicionarTarefa({...copiaDadosInputs})
-                            }}
-                            required
-                        />
-                        <div className="botoes-semana">
-                            {semana.map((dia, index2)=>(
-                                <button type='button' key={index2}>{dia}</button>
-                            ))}
-                        </div>
-
-                        <div className="botoes-submissao">
-                            <button>Cancelar</button>
-                            <button>Salvar</button>
-                        </div>
-
-                    </form>
-                ))}
+                <AdicionarTarefas inputs={inputsAdicionarTarefa} setInputs={setInputsAdicionarTarefa}/>
 
 
                 {listaHabitos.length===0?
