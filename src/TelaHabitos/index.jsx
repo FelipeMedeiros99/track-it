@@ -13,13 +13,23 @@ export default function TelaHabitos(props) {
     
     const {dados, setDados} = useContext(Contexto)
     const [listaHabitos, setListaHabitos] = useState([])
-    const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits'
     const [controladorDeAdicaoDeHabitos, setControladorDeAdicaoDeHabitos] = useState(0)
     const [inputsAdicionarTarefa, setInputsAdicionarTarefa] = useState({})    
-    const configuracao = {
-        headers:{
-            Authorization: `Bearer ${dados.token}`
+    
+    
+    function salvarListaDeHabitos(){
+        const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits'
+        const configuracao = {
+            headers:{
+                Authorization: `Bearer ${dados.token}`
+            }
         }
+        axios.get(URL, configuracao)
+        .then((data)=> {console.log('Lista de hábitos renderizada com sucesso'); 
+                        setListaHabitos(data.data);
+                        console.log(data.data)
+                    })
+        .catch((data)=>console.log("Erro ao renderizar lista de hábitos ", data.response))
     }
 
 
@@ -30,15 +40,10 @@ export default function TelaHabitos(props) {
 
 
     useEffect(()=>{
-        console.log('renderizado o useEffect da tele de hábitos')
-        axios.get(URL, configuracao)
-        .then((data)=> {console.log('Lista de hábitos renderizada com sucesso'); setListaHabitos(data.data)})
-        .catch((data)=>console.log("Erro ao renderizar lista de hábitos ", data.response))
-    }, [dados])
+        salvarListaDeHabitos()
+    }, [])
 
 
-
-    console.log(listaHabitos)
 
     return (
         <>
@@ -50,12 +55,32 @@ export default function TelaHabitos(props) {
                     <ion-icon name="add-outline" onClick={adicionarHabito}></ion-icon>
                 </div>
 
-                <AdicionarTarefas inputs={inputsAdicionarTarefa} setInputs={setInputsAdicionarTarefa}/>
+                <AdicionarTarefas 
+                    inputs={inputsAdicionarTarefa} 
+                    setInputs={setInputsAdicionarTarefa}
+                    salvarListaDeHabitos={salvarListaDeHabitos}
+                />
 
+
+                
 
                 {listaHabitos.length===0?
                 <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>:
-                <></>
+                <>
+                {listaHabitos.map((habito)=>{
+                    const semana = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
+                    return(
+                    <div className="container-tarefas">
+                        <h2>{habito.name}</h2>
+                        {semana.map((siglaDoDia, index)=>{
+                            const diaEstaSelecionado = habito.days.indexOf(index)!== -1                            
+                            return(
+                                <button disabled className={diaEstaSelecionado?'selecionado':''}>{siglaDoDia}</button>
+                            )
+                        })}
+                    </div>
+                )})}
+                </>
                 }
             </Conteudo>
 
@@ -79,5 +104,9 @@ const Conteudo = styled.main`
         width: 40px;
         height: 35px;
         border-radius: 5px;
+    }
+
+    .selecionado{
+        background-color: red;
     }
 `

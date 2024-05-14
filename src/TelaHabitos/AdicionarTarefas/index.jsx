@@ -4,11 +4,10 @@ import { useContext } from "react"
 
 import { Contexto } from "../../Contexto"
 
-export default function AdicionarTarefas({inputs, setInputs}){
+export default function AdicionarTarefas({inputs, setInputs, salvarListaDeHabitos}){
 
     const semana = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
-    const {dados} = useContext(Contexto)
-
+    const {dados, setDados} = useContext(Contexto)
 
     function apagarTarefa(chaveInput){
         let copiaDadosInputs = {...inputs}
@@ -47,7 +46,9 @@ export default function AdicionarTarefas({inputs, setInputs}){
 
         .then((data)=>{
             console.log('tarefa adicionada')
-            apagarTarefa(chaveInput)})
+            apagarTarefa(chaveInput)
+            salvarListaDeHabitos()
+        })
         
         .catch((data)=>console.log('erro ao salvar tarefa: ', data.response))
     }

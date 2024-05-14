@@ -10,6 +10,8 @@ export default function TelaCadastro(props){
     const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up'
     const navigate = useNavigate()
 
+
+
     return(
         <>
             <LogoPaginas />
