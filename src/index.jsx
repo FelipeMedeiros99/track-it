@@ -9,12 +9,21 @@ import TelaCadastro from './TelaCadastro'
 import TelaHabitos from "./TelaHabitos";
 import TelaHoje from "./TelaHoje";
 import TelaHistorico from "./TelaHistorico";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ContextoProvider } from "./Contexto"
 
 function App() {
-    const [dados, setDados] = useState('')
-    console.log(dados)
+    const [dados, setDados] = useState({})
+
+    useEffect(()=>{
+        if(localStorage.userTrackIt!==undefined && dados.length=== undefined){
+            console.log('entrou na condicional')
+            const dadosUserLocalStorage = JSON.parse(localStorage.userTrackIt)
+            setDados(dadosUserLocalStorage)
+        }
+    }, [])
+
+    console.log('lista de dados: ', dados)
     return (
         <BrowserRouter>
             <ContextoProvider value={{ dados, setDados }}>

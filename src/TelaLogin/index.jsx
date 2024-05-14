@@ -14,6 +14,7 @@ export default function TelaLogin(props){
     const { setDados } = useContext(Contexto)
     const navigate = useNavigate()
 
+
     return(
         <>
             <LogoPaginas />
@@ -21,7 +22,9 @@ export default function TelaLogin(props){
                 event.preventDefault()
                 axios.post(URL, {email:valoresInput.email, password:valoresInput.senha})
                 .then((data)=> {
-                    setDados(data.data)
+                    const dados = data.data
+                    setDados(dados)
+                    localStorage.setItem('userTrackIt', JSON.stringify(dados))
                     navigate('/habitos')
                 })
                 .catch((data)=> console.log(data.response))
