@@ -1,11 +1,12 @@
+import { useContext, useEffect, useState } from 'react'
+import styled from 'styled-components'
+import axios from 'axios'
+
 import BarraTopo from '../BarraTopo'
 import BarraFim from '../BarraFim'
-import styled from 'styled-components'
 import AdicionarTarefas from './AdicionarTarefas'
-
 import { Contexto } from '../Contexto'
-import { useContext, useEffect, useState } from 'react'
-import axios from 'axios'
+import ListaHabitos from './ListaHabitos'
 
 
 export default function TelaHabitos(props) {
@@ -24,10 +25,10 @@ export default function TelaHabitos(props) {
                 Authorization: `Bearer ${dados.token}`
             }
         }
+
         axios.get(URL, configuracao)
         .then((data)=> {console.log('Lista de hábitos renderizada com sucesso'); 
                         setListaHabitos(data.data);
-                        console.log(data.data)
                     })
         .catch((data)=>console.log("Erro ao renderizar lista de hábitos ", data.response))
     }
@@ -62,26 +63,10 @@ export default function TelaHabitos(props) {
                 />
 
 
-                
+                <ListaHabitos 
+                    listaHabitos={listaHabitos}
+                />
 
-                {listaHabitos.length===0?
-                <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>:
-                <>
-                {listaHabitos.map((habito)=>{
-                    const semana = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
-                    return(
-                    <div className="container-tarefas">
-                        <h2>{habito.name}</h2>
-                        {semana.map((siglaDoDia, index)=>{
-                            const diaEstaSelecionado = habito.days.indexOf(index)!== -1                            
-                            return(
-                                <button disabled className={diaEstaSelecionado?'selecionado':''}>{siglaDoDia}</button>
-                            )
-                        })}
-                    </div>
-                )})}
-                </>
-                }
             </Conteudo>
 
             <BarraFim value={30}></BarraFim>
