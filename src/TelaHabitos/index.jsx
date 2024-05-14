@@ -10,12 +10,17 @@ import axios from 'axios'
 
 export default function TelaHabitos(props) {
 
+    
     const {dados, setDados} = useContext(Contexto)
     const [listaHabitos, setListaHabitos] = useState([])
     const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits'
     const [controladorDeAdicaoDeHabitos, setControladorDeAdicaoDeHabitos] = useState(0)
     const [inputsAdicionarTarefa, setInputsAdicionarTarefa] = useState({})    
-
+    const configuracao = {
+        headers:{
+            Authorization: `Bearer ${dados.token}`
+        }
+    }
 
 
     function adicionarHabito(){
@@ -23,23 +28,17 @@ export default function TelaHabitos(props) {
         setControladorDeAdicaoDeHabitos(controladorDeAdicaoDeHabitos+1)
     }
 
-    console.log(inputsAdicionarTarefa)
-
-    let configuracao = {
-        headers:{
-            Authorization: `Bearer ${dados.token}`
-        }
-    }
-
-
 
     useEffect(()=>{
+        console.log('renderizado o useEffect da tele de hábitos')
         axios.get(URL, configuracao)
-        .then((data)=> {console.log('deu certo'); setListaHabitos(data.data)})
-        .catch((data)=>console.log("deu erro: ", data.response))
+        .then((data)=> {console.log('Lista de hábitos renderizada com sucesso'); setListaHabitos(data.data)})
+        .catch((data)=>console.log("Erro ao renderizar lista de hábitos ", data.response))
     }, [dados])
 
 
+
+    console.log(listaHabitos)
 
     return (
         <>

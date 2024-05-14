@@ -1,8 +1,20 @@
+import axios from "axios"
 import styled from "styled-components"
+import { useContext } from "react"
+
+import { Contexto } from "../../Contexto"
 
 export default function AdicionarTarefas({inputs, setInputs}){
 
     const semana = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
+    const {dados} = useContext(Contexto)
+
+
+    function apagarTarefa(chaveInput){
+        let copiaDadosInputs = {...inputs}
+        delete copiaDadosInputs[chaveInput]
+        setInputs({...copiaDadosInputs})
+    }
 
     function selecionarDia(chaveInput, index2){
         let copiaDias = inputs[chaveInput].dias
@@ -18,6 +30,28 @@ export default function AdicionarTarefas({inputs, setInputs}){
         copiaInputs[chaveInput].dias = copiaDias
         setInputs(copiaInputs)
     }
+
+    function salvarDados(event, chaveInput){
+        event.preventDefault()
+        const tarefaSelecionada = inputs[chaveInput]
+        const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits'
+        const nome = tarefaSelecionada.texto
+        const dias = tarefaSelecionada.dias
+        const modeloParaEnviar = {name: nome, days:dias}
+        
+        axios.post(URL, modeloParaEnviar, {
+            headers:{
+                Authorization:`Bearer ${dados.token}`
+            }
+        })
+
+        .then((data)=>{
+            console.log('tarefa adicionada')
+            apagarTarefa(chaveInput)})
+        
+        .catch((data)=>console.log('erro ao salvar tarefa: ', data.response))
+    }
+
 
     return(
         <>
@@ -53,14 +87,9 @@ export default function AdicionarTarefas({inputs, setInputs}){
                 <div className="botoes-submissao">
                     <button 
                         type="button"
-                        onClick={()=>{
-                            let copiaDadosInputs = {...inputs}
-                            delete copiaDadosInputs[chaveInput]
-                            setInputs({...copiaDadosInputs})
-                    }}>Cancelar</button>
+                        onClick={()=>apagarTarefa(chaveInput)}>Cancelar</button>
 
-
-                    <button>Salvar</button>
+                    <button onClick={(event)=>salvarDados(event, chaveInput)}>Salvar</button>
                 </div>
 
             </form>

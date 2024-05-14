@@ -17,13 +17,11 @@ function App() {
 
     useEffect(()=>{
         if(localStorage.userTrackIt!==undefined && dados.length=== undefined){
-            console.log('entrou na condicional')
             const dadosUserLocalStorage = JSON.parse(localStorage.userTrackIt)
             setDados(dadosUserLocalStorage)
         }
     }, [])
-
-    console.log('lista de dados: ', dados)
+    
     return (
         <BrowserRouter>
             <ContextoProvider value={{ dados, setDados }}>
