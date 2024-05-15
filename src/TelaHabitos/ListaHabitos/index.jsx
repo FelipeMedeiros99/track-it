@@ -1,4 +1,27 @@
+import axios from "axios"
+
+import { Contexto } from "../../Contexto"
+import { useContext } from "react"
+
 export default function ListaHabitos({ listaHabitos }) {
+
+    function deletarHabito(habito){
+        const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habito.id}`
+        const config = {
+            headers: {
+                Authorization: `Bearer ${dados.token}`
+            }
+        }
+
+        axios.delete(URL, config)
+        .then((data)=>console.log(atualizarDados()))
+        .catch((data)=>console.log('deu erro: ', data.response))
+    }
+
+
+    const {dados, atualizarDados} = useContext(Contexto)
+
+
     return (
         <>
             {listaHabitos.length === 0 ? (
@@ -14,6 +37,7 @@ export default function ListaHabitos({ listaHabitos }) {
                                     <button key={index2} disabled className={diaEstaSelecionado ? 'selecionado' : ''}>{siglaDoDia}</button>
                                 )
                             })}
+                            <ion-icon name="trash-outline" onClick={()=>deletarHabito(habito)}></ion-icon>
                         </div>
                     )})
                 )

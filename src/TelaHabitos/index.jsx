@@ -54,10 +54,10 @@ export default function TelaHabitos(props) {
             <BarraTopo link_foto={'https://midias.correiobraziliense.com.br/_midias/jpg/2016/04/05/675x450/1_cbnfot050420160102-21057794.jpg?20220217210708?20220217210708'} />
 
             <Conteudo>
-                <div className="container-titulo">
+                <ContainerTitulo>
                     <h1>Meus Hábitos</h1>
-                    <ion-icon name="add-outline" onClick={adicionarHabito}></ion-icon>
-                </div>
+                    <ion-icon className="add-tarefa" name="add-outline" onClick={adicionarHabito}></ion-icon>
+                </ContainerTitulo>
 
                 <AdicionarTarefas 
                     inputs={inputsAdicionarTarefa} 
@@ -78,12 +78,19 @@ export default function TelaHabitos(props) {
 }
 
 const Conteudo = styled.main`
+    
     padding: 98px 17px 70px 17px;
-    .container-titulo{
+    
+    .selecionado{
+        background-color: red;
+    }
+`
+
+const ContainerTitulo = styled.div`
+        
         display: flex;
         align-items: center;
         justify-content: space-between;
-    }
 
     ion-icon{
         background-color: #52B6FF;
@@ -92,9 +99,5 @@ const Conteudo = styled.main`
         width: 40px;
         height: 35px;
         border-radius: 5px;
-    }
-
-    .selecionado{
-        background-color: red;
     }
 `
