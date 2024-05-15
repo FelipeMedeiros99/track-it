@@ -16,3 +16,7 @@ h1 {
     font-size: 23px;
     font-weight: 400;
 }
+
+ion-icon:hover, button:hover{
+    cursor: pointer;
+}
