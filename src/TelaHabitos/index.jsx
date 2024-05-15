@@ -19,11 +19,11 @@ export default function TelaHabitos(props) {
             }
         }
 
-        axios.get(URL, configuracao)
-        .then((data)=> {console.log('Lista de hábitos renderizada com sucesso'); 
-                        setListaHabitos(data.data);
-                    })
-        .catch((data)=>console.log("Erro ao renderizar lista de hábitos ", data.response))
+        if (dados.token!==undefined){
+            axios.get(URL, configuracao)
+            .then((data)=>setListaHabitos(data.data))
+            .catch((data)=>console.log("Erro ao renderizar lista de hábitos ", data.response))
+        }
     }
 
 
