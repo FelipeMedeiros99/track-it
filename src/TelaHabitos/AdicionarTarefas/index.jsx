@@ -1,6 +1,8 @@
 import axios from "axios"
 import styled from "styled-components"
 import { useContext } from "react"
+import { useState } from "react"
+import { ThreeDots } from "react-loader-spinner"
 
 import { Contexto } from "../../Contexto"
 
@@ -8,6 +10,7 @@ export default function AdicionarTarefas({inputs, setInputs, salvarListaDeHabito
 
     const semana = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
     const {dados, setDados} = useContext(Contexto)
+    const [carregando, setCarregando] = useState(false)
 
     function apagarTarefa(chaveInput){
         let copiaDadosInputs = {...inputs}
@@ -45,11 +48,16 @@ export default function AdicionarTarefas({inputs, setInputs, salvarListaDeHabito
         })
 
         .then((data)=>{
+            setCarregando(false)
             apagarTarefa(chaveInput)
             salvarListaDeHabitos()
         })
         
-        .catch((data)=>console.log('erro ao salvar tarefa: ', data.response))
+        .catch((data)=>{
+            console.log('erro ao salvar tarefa: ', data.response)
+            setCarregando(false)
+
+        })
     }
 
 
@@ -65,6 +73,7 @@ export default function AdicionarTarefas({inputs, setInputs, salvarListaDeHabito
                         setInputs({...copiaDadosInputs})
                     }}
                     required
+                    disabled={carregando}
                 />
                 
                 <BotoesSemana>
@@ -78,7 +87,8 @@ export default function AdicionarTarefas({inputs, setInputs, salvarListaDeHabito
                             type='button' 
                             key={index2}
                             onClick={()=>selecionarDia(chaveInput, index2)}    
-                            
+                            disabled={carregando}
+
                             >{dia}</button>
                         )
                     })}
@@ -86,10 +96,21 @@ export default function AdicionarTarefas({inputs, setInputs, salvarListaDeHabito
 
                 <div className="botoes-submissao">
                     <button 
+                        disabled={carregando}
                         type="button"
                         onClick={()=>apagarTarefa(chaveInput)}>Cancelar</button>
-
-                    <button onClick={(event)=>salvarDados(event, chaveInput)}>Salvar</button>
+                    <button 
+                        disabled={carregando}
+                        onClick={(event)=>{
+                            salvarDados(event, chaveInput)
+                            setCarregando(true)
+                            }}>
+                                {carregando?
+                                (<ThreeDots 
+                                    color="white"
+                                />):
+                                (<>Salvar</>)}
+                        </button>
                 </div>
 
             </form>

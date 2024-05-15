@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import { ThreeDots } from "react-loader-spinner"
 import axios from "axios"
 
 import GerenciadorInput from "../GerenciadorInput" 
@@ -10,6 +11,7 @@ export default function TelaCadastro(props){
     const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up'
     const navigate = useNavigate()
 
+    const [carregando, setCarregando] = useState(false)
 
 
     return(
@@ -17,23 +19,36 @@ export default function TelaCadastro(props){
             <LogoPaginas />
             <form onSubmit={(event)=>{
                 event.preventDefault()
+                setCarregando(true)
                 axios.post(URL, {
                     email: valoresInput.email,
                     name: valoresInput.nome,
                     image: valoresInput['link foto'],
                     password: valoresInput.senha
                 })
-                .then((data)=>navigate('/'))
-                .catch((data) => console.log(data.response))
+                .then((data)=>{
+                    navigate('/')
+                    setCarregando(false)
+                })
+                .catch((data) => {
+                    console.log(data.response)
+                    setCarregando(false)
+                })
 
                
             }}>
 
-                <GerenciadorInput 
+                <GerenciadorInput   
                     valoresInput={valoresInput}
                     setValoresInput={setValoresInput}    
+                    carregando={carregando}
                 />
-                <button type="submit">Cadastrar</button>
+                <button disabled={carregando} type="submit">
+                    {carregando?(
+                    <ThreeDots 
+                        color="#ffffff"
+                    />):<>Entrar</>}
+                </button>
             </form>
             
             <Link to="/">Já tem uma conta? Faça login</Link>

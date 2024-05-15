@@ -37,7 +37,7 @@ export default function TelaHabitos(props) {
     const [listaHabitos, setListaHabitos] = useState([])
     const [controladorDeAdicaoDeHabitos, setControladorDeAdicaoDeHabitos] = useState(0)
     const [inputsAdicionarTarefa, setInputsAdicionarTarefa] = useState({})        
-
+    
 
     useEffect(()=>{
         atualizarDados()

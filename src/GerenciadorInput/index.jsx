@@ -1,4 +1,4 @@
-export default function GerenciadorInput({ valoresInput, setValoresInput }) {
+export default function GerenciadorInput({ valoresInput, setValoresInput, carregando }) {
 
     const chavesInputs = Object.keys(valoresInput)
 
@@ -34,6 +34,7 @@ export default function GerenciadorInput({ valoresInput, setValoresInput }) {
                     placeholder={chave}
                     required
                     minLength={min_valor}
+                    disabled={carregando}
                 />)
         }))
 }
