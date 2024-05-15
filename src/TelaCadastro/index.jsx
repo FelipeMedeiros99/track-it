@@ -48,11 +48,12 @@ export default function TelaCadastro(props) {
                     {carregando ? (
                         <ThreeDots
                             color="#ffffff"
+                            width={51}
                         />) : <>Entrar</>}
                 </button>
             </form>
 
-            <Link to="/">Já tem uma conta? Faça login</Link>
+            <Link className="link" to="/">Já tem uma conta? Faça login</Link>
         </TelaInicial>
     )
 }

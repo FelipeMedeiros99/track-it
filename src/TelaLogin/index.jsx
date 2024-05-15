@@ -49,6 +49,7 @@ export default function TelaLogin(props){
                     {carregando?(
                     <ThreeDots 
                         color="#ffffff"
+                        width={51}
                     />):<>Entrar</>}
                 </button>
             </form>

@@ -26,6 +26,9 @@ input::placeholder{
 
 
 button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: #52B6FF;
     color: white;
     font-size: 21px;
