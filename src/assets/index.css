@@ -20,3 +20,23 @@ h1 {
 ion-icon:hover, button:hover{
     cursor: pointer;
 }
+
+input::placeholder{
+    color:#DBDBDB;
+}
+
+input{
+    border: 1px solid #D4D4D4;
+    border-radius: 5px
+}
+
+button{
+    border: none;
+    border-radius: 5px
+
+}
+
+.link{
+    color: #52B6FF;
+    font-size: 14px;
+}

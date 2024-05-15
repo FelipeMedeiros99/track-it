@@ -6,8 +6,7 @@ import {ThreeDots} from 'react-loader-spinner'
 import GerenciadorInput from '../GerenciadorInput'
 import LogoPaginas from '../LogoPaginas'
 import { Contexto } from '../Contexto'
-import styled from 'styled-components'
-
+import TelaInicial from '../assets/estiloLogin'
 
 export default function TelaLogin(props){
 
@@ -19,11 +18,11 @@ export default function TelaLogin(props){
 
 
     return(
-        <>
+        <TelaInicial>
             <LogoPaginas />
             
 
-            <Form onSubmit={(event)=>{
+            <form onSubmit={(event)=>{
                 event.preventDefault()
                 setCarregando(true)
                 axios.post(URL, {email:valoresInput.email, password:valoresInput.senha})
@@ -52,14 +51,11 @@ export default function TelaLogin(props){
                         color="#ffffff"
                     />):<>Entrar</>}
                 </button>
-            </Form>
+            </form>
 
-            <Link to='/cadastro'> Não tem uma conta? Cadastre-se</Link>
+            <Link className='link' to='/cadastro'> Não tem uma conta? Cadastre-se</Link>
 
-        </>
+        </TelaInicial>
     )
 }
 
-const Form = styled.form`
-
-`
