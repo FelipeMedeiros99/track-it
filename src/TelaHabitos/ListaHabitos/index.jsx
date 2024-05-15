@@ -3,9 +3,21 @@ import axios from "axios"
 import { Contexto } from "../../Contexto"
 import { useContext } from "react"
 
-export default function ListaHabitos({ listaHabitos }) {
+export default function ListaHabitos({ setListaHabitos, listaHabitos }) {
 
-    function deletarHabito(habito){
+    function deletarHabitoDaTela(id) {
+        const copiaHabitos = [...listaHabitos]
+        for (let i = 0; i < copiaHabitos.length; i++) {
+            if (copiaHabitos[i].id === id) {
+                copiaHabitos.splice(i, 1)
+            }
+        }
+        setListaHabitos([...copiaHabitos])
+    }
+
+
+    function deletarHabito(habito) {
+
         const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habito.id}`
         const config = {
             headers: {
@@ -13,13 +25,14 @@ export default function ListaHabitos({ listaHabitos }) {
             }
         }
 
+        deletarHabitoDaTela(habito.id)
         axios.delete(URL, config)
-        .then((data)=>console.log(atualizarDados()))
-        .catch((data)=>console.log('deu erro: ', data.response))
+            .then((data) => atualizarDados())
+            .catch((data) => console.log('deu erro: ', data.response))
     }
 
 
-    const {dados, atualizarDados} = useContext(Contexto)
+    const { dados, atualizarDados } = useContext(Contexto)
 
 
     return (
@@ -37,9 +50,10 @@ export default function ListaHabitos({ listaHabitos }) {
                                     <button key={index2} disabled className={diaEstaSelecionado ? 'selecionado' : ''}>{siglaDoDia}</button>
                                 )
                             })}
-                            <ion-icon name="trash-outline" onClick={()=>deletarHabito(habito)}></ion-icon>
+                            <ion-icon name="trash-outline" onClick={() => deletarHabito(habito)}></ion-icon>
                         </div>
-                    )})
+                    )
+                })
                 )
             }
         </>

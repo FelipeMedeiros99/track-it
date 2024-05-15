@@ -67,6 +67,7 @@ export default function TelaHabitos(props) {
 
 
                 <ListaHabitos 
+                    setListaHabitos={setListaHabitos}
                     listaHabitos={listaHabitos}
                 />
 
