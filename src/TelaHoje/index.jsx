@@ -13,12 +13,30 @@ export default function TelaHoje() {
     
 
     function atualizarTarefasDeHoje(){
+        console.log('atualizando dados')
         const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today'
         if (dados.token !== undefined) {
             axios.get(URL, config)
-                .then((data) => setTarefasDeHoje(data.data))
+                .then((data) => {
+                    setTarefasDeHoje(data.data);
+                })
                 .catch((data) => console.log(data.response))
         }
+
+    }
+
+    function atualizarTarefasConcluidas(){
+
+        let quantidadeDeTarefas = tarefasDeHoje.length
+        let quantidadeDeTarefasConcluidas = 0
+        for(let i=0; i<quantidadeDeTarefas; i++){
+            if(tarefasDeHoje[i].done){
+                quantidadeDeTarefasConcluidas++
+            }
+        }
+        let valorEmPorcentagem = Math.round((quantidadeDeTarefasConcluidas/quantidadeDeTarefas)*100)
+        console.log(valorEmPorcentagem)
+        setTarefasConcluidas(valorEmPorcentagem)
     }
 
 
@@ -49,7 +67,7 @@ export default function TelaHoje() {
     }
 
 
-    const { dados, atualizarDados } = useContext(Contexto)
+    const { dados, atualizarDados, setTarefasConcluidas } = useContext(Contexto)
     const [tarefasDeHoje, setTarefasDeHoje] = useState([])
 
     const diasDaSemana = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
@@ -73,6 +91,9 @@ export default function TelaHoje() {
         atualizarTarefasDeHoje()
     }, [dados])
 
+    useEffect(()=>{
+        atualizarTarefasConcluidas()
+    }, [tarefasDeHoje])
 
     return (
         <>
@@ -97,7 +118,7 @@ export default function TelaHoje() {
                 }
             </Conteudo>
 
-            <BarraFim value={10}></BarraFim>
+            <BarraFim></BarraFim>
         </>
     )
 }

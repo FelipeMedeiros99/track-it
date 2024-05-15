@@ -1,16 +1,28 @@
 import { CircularProgressbarWithChildren } from "react-circular-progressbar"
 import styled from "styled-components"
 import { Link } from "react-router-dom"
+import { useContext } from "react"
 
-export default function BarraFim({value}) {
+import { Contexto } from "../Contexto"
+
+
+export default function BarraFim() {
+
+    const {tarefasConcluidas} = useContext(Contexto)
+
+
     return (
+        
+        
+
+
         <Barra>
             <Link to="/habitos">Habitos</Link>
 
             <Link to="/hoje">
             <div className="container-progressbar">
                 <CircularProgressbarWithChildren
-                    value={value}
+                    value={tarefasConcluidas}
                     />
                 <p className="legenda">Hoje</p>
             </div>

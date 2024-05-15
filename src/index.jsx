@@ -21,8 +21,8 @@ function App() {
         }
     }
 
-
     const [dados, setDados] = useState({})
+    const [tarefasConcluidas, setTarefasConcluidas] = useState(0)
 
     useEffect(()=>{
         atualizarDados()
@@ -30,7 +30,7 @@ function App() {
     
     return (
         <BrowserRouter>
-            <ContextoProvider value={{ dados, setDados, atualizarDados }}>
+            <ContextoProvider value={{ dados, setDados, atualizarDados, tarefasConcluidas, setTarefasConcluidas }}>
                 <Routes>
                     <Route path="/" element={<TelaLogin />} />
                     <Route path="/cadastro" element={<TelaCadastro />} />

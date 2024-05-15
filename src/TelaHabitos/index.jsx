@@ -33,7 +33,7 @@ export default function TelaHabitos(props) {
     }
 
 
-    const {dados, setDados, atualizarDados} = useContext(Contexto)
+    const {dados, atualizarDados} = useContext(Contexto)
     const [listaHabitos, setListaHabitos] = useState([])
     const [controladorDeAdicaoDeHabitos, setControladorDeAdicaoDeHabitos] = useState(0)
     const [inputsAdicionarTarefa, setInputsAdicionarTarefa] = useState({})        
@@ -71,7 +71,7 @@ export default function TelaHabitos(props) {
 
             </Conteudo>
 
-            <BarraFim value={30}></BarraFim>
+            <BarraFim></BarraFim>
         </>
     )
 }

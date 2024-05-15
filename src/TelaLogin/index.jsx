@@ -25,7 +25,7 @@ export default function TelaLogin(props){
                     const dados = data.data
                     setDados(dados)
                     localStorage.setItem('userTrackIt', JSON.stringify(dados))
-                    navigate('/habitos')
+                    navigate('/hoje')
                 })
                 .catch((data)=> console.log(data.response))
             }}>

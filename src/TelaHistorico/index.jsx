@@ -13,7 +13,7 @@ export default function TelaHistorico(props){
             <p>Em breve você poderá ver o histórico dos seus hábitos aqui!</p>
         </Conteudo>
 
-        <BarraFim value={10}></BarraFim> 
+        <BarraFim></BarraFim> 
         </>
     )
 }
