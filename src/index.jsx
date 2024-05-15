@@ -13,18 +13,24 @@ import { useEffect, useState } from "react";
 import { ContextoProvider } from "./Contexto"
 
 function App() {
-    const [dados, setDados] = useState({})
 
-    useEffect(()=>{
+    function atualizarDados(){
         if(localStorage.userTrackIt!==undefined && dados.length=== undefined){
             const dadosUserLocalStorage = JSON.parse(localStorage.userTrackIt)
             setDados(dadosUserLocalStorage)
         }
+    }
+
+
+    const [dados, setDados] = useState({})
+
+    useEffect(()=>{
+        atualizarDados()
     }, [])
     
     return (
         <BrowserRouter>
-            <ContextoProvider value={{ dados, setDados }}>
+            <ContextoProvider value={{ dados, setDados, atualizarDados }}>
                 <Routes>
                     <Route path="/" element={<TelaLogin />} />
                     <Route path="/cadastro" element={<TelaCadastro />} />

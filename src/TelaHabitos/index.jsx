@@ -10,13 +10,6 @@ import ListaHabitos from './ListaHabitos'
 
 
 export default function TelaHabitos(props) {
-
-    
-    const {dados, setDados} = useContext(Contexto)
-    const [listaHabitos, setListaHabitos] = useState([])
-    const [controladorDeAdicaoDeHabitos, setControladorDeAdicaoDeHabitos] = useState(0)
-    const [inputsAdicionarTarefa, setInputsAdicionarTarefa] = useState({})    
-    
     
     function salvarListaDeHabitos(){
         const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits'
@@ -40,9 +33,19 @@ export default function TelaHabitos(props) {
     }
 
 
+    const {dados, setDados, atualizarDados} = useContext(Contexto)
+    const [listaHabitos, setListaHabitos] = useState([])
+    const [controladorDeAdicaoDeHabitos, setControladorDeAdicaoDeHabitos] = useState(0)
+    const [inputsAdicionarTarefa, setInputsAdicionarTarefa] = useState({})        
+
+
+    useEffect(()=>{
+        atualizarDados()
+    }, [])
+
     useEffect(()=>{
         salvarListaDeHabitos()
-    }, [])
+    }, [dados])
 
 
 
