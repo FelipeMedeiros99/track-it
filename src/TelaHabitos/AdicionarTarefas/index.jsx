@@ -45,7 +45,6 @@ export default function AdicionarTarefas({inputs, setInputs, salvarListaDeHabito
         })
 
         .then((data)=>{
-            console.log('tarefa adicionada')
             apagarTarefa(chaveInput)
             salvarListaDeHabitos()
         })

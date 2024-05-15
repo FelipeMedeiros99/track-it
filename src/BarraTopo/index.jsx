@@ -1,11 +1,19 @@
 import styled from 'styled-components'
 import trackit from './track-it-text.svg'
+import { useContext } from 'react'
 
-export default function BarraTopo({ link_foto }) {
+import { Contexto } from '../Contexto'
+
+
+export default function BarraTopo() {
+
+    const {dados} = useContext(Contexto)
+
+
     return (
         <Barra>
             <img className='simbolo' src={trackit} alt="track it" />
-            <img className='foto-perfil' src={link_foto} alt="foto do usuário" />
+            <img className='foto-perfil' src={dados.image} alt="foto do usuário" />
         </Barra>
     )
 }
