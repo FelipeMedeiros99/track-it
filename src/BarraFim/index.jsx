@@ -17,7 +17,7 @@ export default function BarraFim() {
 
 
         <Barra>
-            <Link to="/habitos">Habitos</Link>
+            <Link className="endereco" to="/habitos">Habitos</Link>
 
             <Link to="/hoje">
             <div className="container-progressbar">
@@ -28,7 +28,7 @@ export default function BarraFim() {
             </div>
             </Link>
 
-            <Link to="/historico">Historico</Link>
+            <Link className="endereco" to="/historico">Historico</Link>
 
         </Barra>
     )
@@ -51,7 +51,7 @@ const Barra = styled.div`
         width: 91px;
         background-color: #52B6FF;
         border-radius: 100%;
-        margin-bottom: 40px;
+        margin: 40px;
     }
 
     .legenda{
@@ -80,6 +80,18 @@ const Barra = styled.div`
 
     .CircularProgressbar-background{
         fill: #52B6FF;
+    }
+
+
+    .endereco{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #52B6FF;
+        text-decoration: none;
+        font-size: 18px;
+        width: 100%;
+        height:100%
     }
 
 `

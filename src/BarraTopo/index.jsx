@@ -39,6 +39,7 @@ const Barra = styled.div`
     .foto-perfil{
         height: 51px;
         width: 51px;
+        border-radius: 100px;
     }
 
 `
