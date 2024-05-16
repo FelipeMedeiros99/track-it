@@ -23,6 +23,7 @@ export default function GerenciadorInput({ valoresInput, setValoresInput, carreg
             }
 
             return (
+                tipo!=='link'?
                 <input
                     key={index}
                     type={tipo}
@@ -35,7 +36,21 @@ export default function GerenciadorInput({ valoresInput, setValoresInput, carreg
                     required
                     minLength={min_valor}
                     disabled={carregando}
-                />)
+                />
+                :
+                <input
+                    key={index}
+                    type={tipo}
+                    value={valoresInput[chave]}
+                    onChange={(event) => {
+                        const valor = event.target.value
+                        setValoresInput({ ...valoresInput, [chave]: valor })
+                    }}
+                    placeholder={chave}
+                    minLength={min_valor}
+                    disabled={carregando}
+                />
+            )
         }))
 }
 

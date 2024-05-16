@@ -22,12 +22,25 @@ export default function TelaCadastro(props) {
                 event.preventDefault()
                 setUsuarioExiste(false)
                 setCarregando(true)
-                axios.post(URL, {
-                    email: valoresInput.email,
-                    name: valoresInput.nome,
-                    image: valoresInput['link foto'],
-                    password: valoresInput.senha
-                })
+                let objeto = {}
+                
+                if (valoresInput['link foto'].length >0){
+                    objeto = {
+                        email: valoresInput.email,
+                        name: valoresInput.nome,
+                        image: valoresInput['link foto'],
+                        password: valoresInput.senha
+                    }  
+                }else{
+                    objeto = {
+                        email: valoresInput.email,
+                        name: valoresInput.nome,
+                        image:'https://chatobjj.com.br/wp-content/uploads/2023/05/sem-imagem-avatar.png',
+                        password: valoresInput.senha
+                    } 
+                }
+
+                axios.post(URL, objeto)
                     .then((data) => {
                         navigate('/')
                         setCarregando(false)
