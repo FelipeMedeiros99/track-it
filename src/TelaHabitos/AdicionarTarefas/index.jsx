@@ -5,6 +5,7 @@ import { useState } from "react"
 import { ThreeDots } from "react-loader-spinner"
 
 import { Contexto } from "../../Contexto"
+import { ContainerElementos } from "../../assets/estiloDemaisPaginas"
 
 export default function AdicionarTarefas({inputs, setInputs, salvarListaDeHabitos}){
 
@@ -64,7 +65,7 @@ export default function AdicionarTarefas({inputs, setInputs, salvarListaDeHabito
     return(
         <>
         {Object.keys(inputs).map((chaveInput, index)=>(
-            <form key={index} className="container-adicionar-tarefa">
+            <ContainerElementos key={index}>
                 <input type="text" 
                     value={inputs[chaveInput].texto}
                     onChange={(event)=>{
@@ -74,16 +75,17 @@ export default function AdicionarTarefas({inputs, setInputs, salvarListaDeHabito
                     }}
                     required
                     disabled={carregando}
+                    placeholder="nome do hábito"
                 />
                 
-                <BotoesSemana>
+                <div className="container-botoes-semana">
                     {semana.map((dia, index2)=>{
                         
                         let botaoSelecionado = inputs[chaveInput].dias.indexOf(index2)!==-1
                         
                         return(
                         <button 
-                            className={botaoSelecionado?'selecionado':''}
+                            className={botaoSelecionado?'selecionado botao-dia':'botao-dia'}
                             type='button' 
                             key={index2}
                             onClick={()=>selecionarDia(chaveInput, index2)}    
@@ -92,14 +94,16 @@ export default function AdicionarTarefas({inputs, setInputs, salvarListaDeHabito
                             >{dia}</button>
                         )
                     })}
-                </BotoesSemana>
+                </div>
 
                 <div className="botoes-submissao">
                     <button 
+                        className="botao-cancelar"
                         disabled={carregando}
                         type="button"
                         onClick={()=>apagarTarefa(chaveInput)}>Cancelar</button>
                     <button 
+                        className="botao-salvar"
                         disabled={carregando}
                         onClick={(event)=>{
                             salvarDados(event, chaveInput)
@@ -108,21 +112,16 @@ export default function AdicionarTarefas({inputs, setInputs, salvarListaDeHabito
                                 {carregando?
                                 (<ThreeDots 
                                     color="white"
+                                    width={51}
                                 />):
                                 (<>Salvar</>)}
                         </button>
                 </div>
 
-            </form>
+            </ContainerElementos>
         ))}
     </>
     )
 }
 
 
-const BotoesSemana = styled.div`
-    .selecionado{
-        background-color: #3180c5;
-    }
-
-`

@@ -7,7 +7,7 @@ import { useContext, useEffect, useState } from "react"
 import BarraFim from "../BarraFim"
 import BarraTopo from "../BarraTopo"
 import { Contexto } from "../Contexto"
-
+import {Main, Titulo} from "../assets/estiloDemaisPaginas"
 
 
 export default function TelaHoje() {
@@ -100,10 +100,12 @@ export default function TelaHoje() {
         <>
             <BarraTopo/>
 
-            <Conteudo>
-                <h1>{diaDaSemana}, {diaDoMes > 9 ? diaDoMes : `0${diaDoMes}`}/{mes > 9 ? mes : `0${mes}`}/{ano}</h1>
-                <p>Nenhum hábito concluído ainda</p>
+            <Main>
+                <Titulo>
+                    <h1>{diaDaSemana}, {diaDoMes > 9 ? diaDoMes : `0${diaDoMes}`}/{mes > 9 ? mes : `0${mes}`}/{ano}</h1>
+                </Titulo>
 
+                <p>Nenhum hábito concluído ainda</p>
                 {tarefasDeHoje.length > 0 ?
                     (tarefasDeHoje.map((tarefa, index) => (
                         <TarefasDoDia key={index} tarefaconcluida={`${tarefa.done}`}>
@@ -117,17 +119,13 @@ export default function TelaHoje() {
                     ))) :
                     <></>
                 }
-            </Conteudo>
+            </Main>
 
             <BarraFim></BarraFim>
         </>
     )
 }
 
-const Conteudo = styled.main`
-    padding: 98px 17px 70px 17px;
-    
-`
 const TarefasDoDia = styled.div`
     display: flex;
     justify-content: space-between;

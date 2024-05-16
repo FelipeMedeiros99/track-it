@@ -7,7 +7,7 @@ import BarraFim from '../BarraFim'
 import AdicionarTarefas from './AdicionarTarefas'
 import { Contexto } from '../Contexto'
 import ListaHabitos from './ListaHabitos'
-
+import {Main, Titulo} from '../assets/estiloDemaisPaginas'
 
 export default function TelaHabitos(props) {
     
@@ -51,11 +51,13 @@ export default function TelaHabitos(props) {
         <>
             <BarraTopo/>
             
-            <Conteudo>
-                <ContainerTitulo>
+            <Main>
+                <Titulo className='titulo'>
                     <h1>Meus Hábitos</h1>
-                    <ion-icon className="add-tarefa" name="add-outline" onClick={adicionarHabito}></ion-icon>
-                </ContainerTitulo>
+                    <button onClick={adicionarHabito} className="container-icone">
+                        <ion-icon name="add-outline"></ion-icon>
+                    </button>
+                </Titulo>
 
                 <AdicionarTarefas 
                     inputs={inputsAdicionarTarefa} 
@@ -64,39 +66,16 @@ export default function TelaHabitos(props) {
                 />
 
 
-                <ListaHabitos 
+                <ListaHabitos
                     setListaHabitos={setListaHabitos}
                     listaHabitos={listaHabitos}
                 />
 
-            </Conteudo>
+            </Main>
 
-            <BarraFim></BarraFim>
+            <BarraFim/>
         </>
     )
 }
 
-const Conteudo = styled.main`
-    
-    padding: 98px 17px 70px 17px;
-    
-    .selecionado{
-        background-color: red;
-    }
-`
 
-const ContainerTitulo = styled.div`
-        
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-    ion-icon{
-        background-color: #52B6FF;
-        color: white;
-        font-size: 23px;
-        width: 40px;
-        height: 35px;
-        border-radius: 5px;
-    }
-`

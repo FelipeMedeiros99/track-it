@@ -44,14 +44,14 @@ const Barra = styled.div`
     align-items: center;
     height: 70px;
     padding: 0 36px 0 36px;
-
+    background-color: white;
     .container-progressbar{
         position: relative;
         height: 91px;
         width: 91px;
         background-color: #52B6FF;
         border-radius: 100%;
-        margin: 40px;
+        margin-bottom: 40px;
     }
 
     .legenda{

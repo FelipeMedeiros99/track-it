@@ -1,7 +1,8 @@
 import axios from "axios"
+import { useContext } from "react"
 
 import { Contexto } from "../../Contexto"
-import { useContext } from "react"
+import { ContainerElementos } from "../../assets/estiloDemaisPaginas"
 
 export default function ListaHabitos({ setListaHabitos, listaHabitos }) {
 
@@ -36,26 +37,32 @@ export default function ListaHabitos({ setListaHabitos, listaHabitos }) {
 
 
     return (
-        <>
+        <div className="lista-habitos">
             {listaHabitos.length === 0 ? (
-                <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>) :
+                <p className="texto-temporario">Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>) :
                 (listaHabitos.map((habito, index) => {
                     const semana = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
                     return (
-                        <div key={index} className="container-tarefas">
+                        <ContainerElementos key={index}>
                             <h2>{habito.name}</h2>
+                            <div className="container-botoes-semana">
                             {semana.map((siglaDoDia, index2) => {
                                 const diaEstaSelecionado = habito.days.indexOf(index2) !== -1
                                 return (
-                                    <button key={index2} disabled className={diaEstaSelecionado ? 'selecionado' : ''}>{siglaDoDia}</button>
+                                    <button key={index2} disabled className={diaEstaSelecionado ? 'selecionado botao-dia' : 'botao-dia'}>{siglaDoDia}</button>
                                 )
                             })}
-                            <ion-icon name="trash-outline" onClick={() => deletarHabito(habito)}></ion-icon>
-                        </div>
+                            </div>
+                            <div className="container-icone-lixo">
+
+                                <ion-icon name="trash-outline" onClick={() => deletarHabito(habito)}></ion-icon>
+                            </div>
+                            
+                        </ContainerElementos>
                     )
                 })
                 )
             }
-        </>
+        </div>
     )
 }
