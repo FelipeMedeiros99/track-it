@@ -9,6 +9,18 @@ const Main = styled.main`
         margin-top: 29px
     }
 
+    .texto{
+
+        margin-top: -25px;
+        margin-bottom: 28px;
+    }
+    .tarefas-concluidas{
+        color: #8FC549;
+    }
+
+
+
+
 `
 
 const Titulo = styled.div`
@@ -28,6 +40,8 @@ const Titulo = styled.div`
         height: 35px;
         border-radius: 5px;
     }
+
+
 
 `
 
@@ -98,9 +112,34 @@ const ContainerElementos = styled.form`
         top: 11px;
     }
 
+`
 
+
+const TarefasDoDia = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .container-marcar-concluido{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: ${props => props.tarefaconcluida === 'true' ? '#8FC549' : '#EBEBEB'};
+        width: 69px;
+        height: 69px;
+        font-size: 60px;
+        border-radius: 5px;
+        color: white;
+        font-weight: 700;
+
+    }
+
+    .container-marcar-concluido:hover{
+        cursor: pointer;
+    }
 
 `
 
 
-export {Main, Titulo, ContainerElementos}
+
+export {Main, Titulo, ContainerElementos, TarefasDoDia}
