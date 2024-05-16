@@ -41,6 +41,13 @@ input, button{
     max-width: 500px;
     height: 45px;
 }
+
+.nao-encontrado{
+    color: #f33939b7;
+    
+    font-style: italic;
+}
+
 `
 
 export default TelaInicial

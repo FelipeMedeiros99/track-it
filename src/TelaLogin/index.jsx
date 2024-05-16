@@ -15,15 +15,15 @@ export default function TelaLogin(props){
     const { setDados } = useContext(Contexto)
     const navigate = useNavigate()
     const [carregando, setCarregando] = useState(false)
-
+    const [naoEncontrado, setNaoEncontrado] = useState(false)
 
     return(
         <TelaInicial>
             <LogoPaginas />
-            
 
             <form onSubmit={(event)=>{
                 event.preventDefault()
+                setNaoEncontrado(false)
                 setCarregando(true)
                 axios.post(URL, {email:valoresInput.email, password:valoresInput.senha})
                 .then((data)=> {
@@ -34,8 +34,8 @@ export default function TelaLogin(props){
                     setCarregando(false)
                 })
                 .catch((data)=> {
-                    console.log(data.response)
                     setCarregando(false)
+                    setNaoEncontrado(true)
                 })
             }}>
                 <GerenciadorInput
@@ -43,6 +43,8 @@ export default function TelaLogin(props){
                     setValoresInput={setValoresInput}
                     carregando={carregando}
                 />
+
+                {naoEncontrado?<p className='nao-encontrado'>Usuário ou senha incorretos...</p>:<></>}
                 
                 <button disabled={carregando} type="submit">
                     
@@ -52,6 +54,7 @@ export default function TelaLogin(props){
                         width={51}
                     />):<>Entrar</>}
                 </button>
+
             </form>
 
             <Link className='link' to='/cadastro'> Não tem uma conta? Cadastre-se</Link>
