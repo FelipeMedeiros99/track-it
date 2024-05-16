@@ -11,7 +11,7 @@ export default function TelaCadastro(props) {
     const [valoresInput, setValoresInput] = useState({ email: '', senha: '', nome: '', 'link foto': '' })
     const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up'
     const navigate = useNavigate()
-
+    const [usuarioExiste, setUsuarioExiste] = useState(false)
     const [carregando, setCarregando] = useState(false)
 
 
@@ -20,6 +20,7 @@ export default function TelaCadastro(props) {
             <LogoPaginas/>
             <form onSubmit={(event) => {
                 event.preventDefault()
+                setUsuarioExiste(false)
                 setCarregando(true)
                 axios.post(URL, {
                     email: valoresInput.email,
@@ -33,6 +34,9 @@ export default function TelaCadastro(props) {
                     })
                     .catch((data) => {
                         console.log(data.response)
+                        if(data.response.status===409){
+                            setUsuarioExiste(true)
+                        }
                         setCarregando(false)
                     })
 
@@ -44,6 +48,7 @@ export default function TelaCadastro(props) {
                     setValoresInput={setValoresInput}
                     carregando={carregando}
                 />
+                {usuarioExiste?<p className='ja-cadastrado'>Este usuário já está cadastrado</p>:<></>}
                 <button disabled={carregando} type="submit">
                     {carregando ? (
                         <ThreeDots

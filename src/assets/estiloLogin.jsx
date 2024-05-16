@@ -42,7 +42,7 @@ input, button{
     height: 45px;
 }
 
-.nao-encontrado{
+.nao-encontrado, .ja-cadastrado{
     color: #f33939b7;
     
     font-style: italic;
